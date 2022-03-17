@@ -8,6 +8,7 @@ void main() {
 
 class MyApp extends StatefulWidget {
   @override
+
   State<MyApp> createState() {
     return _MyAppState();
   }
@@ -29,6 +30,7 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
         appBar: AppBar(
           title: Text(appName),
+          backgroundColor: Colors.green,
         ),
         body: buildBody(context));
   }
@@ -63,7 +65,10 @@ class _MyAppState extends State<MyApp> {
                         students[index].grade.toString()+" ["+students[index].getStatus+"]"),
                     trailing: buildStatusIcon(students[index].grade),
                     onTap: (){
-                      seciliOgrenci = students[index].name+" "+students[index].lastName;
+                      setState(() {
+                        seciliOgrenci = students[index].name+" "+students[index].lastName;
+                      });
+
                       //print(seciliOgrenci);
                       Text(seciliOgrenci);
 
@@ -71,14 +76,66 @@ class _MyAppState extends State<MyApp> {
                   );
                 })),
         Text("secili ogrenci "+seciliOgrenci),
-        Center(
-          child: RaisedButton(
-              child: Text("sonucu gorelim1111"),
-              onPressed: () {
-                var message = sonucDon(25);
-                alertGoster(context, message);
-              }),
+        Row(
+            children: [
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 2,
+                child: RaisedButton(
+                  color: Colors.green,
+                      textColor: Colors.white,
+                      child: Row(
+                        children: [
+                          Text("yeni ogrenci"),
+                          Icon(Icons.add)
+                        ],
+                      ),
+                      onPressed: () {
+                        var message = sonucDon(25);
+                        alertGoster(context, message);
+                      }),
+
+              ),              Flexible(
+                fit: FlexFit.tight,
+                flex: 2,
+                child: RaisedButton(
+                  color: Colors.blue,
+                    textColor: Colors.white,
+                    child: Row(
+                      children: [
+
+                        Text("guncelle"),
+                        Icon(Icons.update),
+                        SizedBox(width: 5.0,)
+                      ],
+                    ),
+                    onPressed: () {
+                      var message = sonucDon(25);
+                      alertGoster(context, message);
+                    }),
+
+              ),              Flexible(
+                fit: FlexFit.tight,
+                flex: 1,
+                child: RaisedButton(
+                  color: Colors.red,
+                    textColor: Colors.white,
+                    child: Row(
+                      children: [
+                        Text("sil"),
+                        SizedBox(width: 5.0,),
+                        Icon(Icons.person_remove)
+                      ],
+                    ),
+                    onPressed: () {
+                      var message = sonucDon(25);
+                      alertGoster(context, message);
+                    }),
+
+              )
+            ],
         ),
+
       ],
     );
   }
