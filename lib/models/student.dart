@@ -18,14 +18,12 @@ class Student{
    this.lastName=lastName;
    this.grade=grade;
  }
-  String get getName{
+ Student.withoutInfo(){
 
-   return "Ogr -"+this.name;
  }
 
- void set setName(String value){
-  this.name=value;
- }
+
+
 
  String get getStatus{
   String message=" ";
