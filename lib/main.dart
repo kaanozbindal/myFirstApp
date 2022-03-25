@@ -1,4 +1,5 @@
-import 'dart:ffi';
+//import 'dart:ffi';
+import 'package:exercise/Screens/studentUpdate.dart';
 import 'package:exercise/Screens/student_add.dart';
 import 'package:exercise/models/student.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String appName = "ogrenci takip sistemi";
 
-  late Student selectedStudent = Student.withID(0, "", "", 0);
+   Student selectedStudent = Student.withID(0, "", "", 0);
 
   List<Student> students = [
     new Student.withID(1, "kaan", "ozbındal", 75),
@@ -53,6 +54,7 @@ class _MyAppState extends State<MyApp> {
                 itemCount: students.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
+                    enabled: true,
                     leading: CircleAvatar(
                       backgroundImage: NetworkImage(
                           "https://w0.peakpx.com/wallpaper/589/478/HD-wallpaper-duvar-kagidi-new-game-zar-siyah.jpg"),
@@ -91,7 +93,7 @@ class _MyAppState extends State<MyApp> {
                     children: [Text("yeni ogrenci"), Icon(Icons.add)],
                   ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentAdd()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentAdd(students)));
                   }),
             ),
             Flexible(
@@ -101,7 +103,7 @@ class _MyAppState extends State<MyApp> {
                   color: Colors.blue,
                   textColor: Colors.white,
                   child: Row(
-                    children: [
+                    children: const[
                       Text("guncelle"),
                       Icon(Icons.update),
                       SizedBox(
@@ -111,7 +113,8 @@ class _MyAppState extends State<MyApp> {
                   ),
                   onPressed: () {
                     var message = "guncellendi : "+selectedStudent.name;
-                    eventInfo(message);
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>StudentUpdate(selectedStudent)));
+                    //eventInfo(message);
                   }),
             ),
             Flexible(
